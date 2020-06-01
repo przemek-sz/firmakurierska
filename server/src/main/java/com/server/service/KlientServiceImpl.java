@@ -5,6 +5,7 @@ import com.server.dto.KlientRegistrationDto;
 import com.server.model.Klient;
 import com.server.repository.KlientRepository;
 import com.server.repository.UserRoleRepository;
+import com.server.service.dtoconverters.BaseConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +30,7 @@ public class KlientServiceImpl implements KlientService {
     }
 
     @Override
-    public void addUser(KlientRegistrationDto userDto) {
+    public void addKlient(KlientRegistrationDto userDto) {
 
         String DEFAULT_ROLE="ROLE_USER";
 

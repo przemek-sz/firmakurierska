@@ -24,7 +24,7 @@ class Przesylka extends Component{
             <Link to='/przesylkiKlienta'>  <input type="submit" value="Wyświetl moje przesylki"/></Link>
             </form>
             <form>
-            <Link to='/nowaPrzesylka'> <input type="submit" value="Nadanie nowej przesylki"/></Link>
+            <Link to='/nadaniePrzesylki'> <input type="submit" value="Nadanie nowej przesylki"/></Link>
             </form>
             </div>)
     }

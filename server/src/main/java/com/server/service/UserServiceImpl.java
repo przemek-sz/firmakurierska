@@ -5,6 +5,7 @@ import com.server.dto.UserRegistrationDto;
 import com.server.model.User;
 import com.server.repository.UserRepository;
 import com.server.repository.UserRoleRepository;
+import com.server.service.dtoconverters.BaseConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

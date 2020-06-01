@@ -19,11 +19,9 @@ public class Klient extends User{
     private List<Przesylka> przesylki;
 
     private String imieinazwisko;
-    private String kodpocztowy;
-    private String miasto;
-    private String ulica;
-    private String numerdomu;
-    private String nrlokalu;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="adres")
+    private Adres adres;
 
     public List<Przesylka> getPrzesylki() {
         return przesylki;
@@ -41,43 +39,11 @@ public class Klient extends User{
         this.imieinazwisko = imieinazwisko;
     }
 
-    public String getKodpocztowy() {
-        return kodpocztowy;
+    public Adres getAdres() {
+        return adres;
     }
 
-    public void setKodpocztowy(String kodpocztowy) {
-        this.kodpocztowy = kodpocztowy;
-    }
-
-    public String getMiasto() {
-        return miasto;
-    }
-
-    public void setMiasto(String miasto) {
-        this.miasto = miasto;
-    }
-
-    public String getUlica() {
-        return ulica;
-    }
-
-    public void setUlica(String ulica) {
-        this.ulica = ulica;
-    }
-
-    public String getNumerdomu() {
-        return numerdomu;
-    }
-
-    public void setNumerdomu(String numerdomu) {
-        this.numerdomu = numerdomu;
-    }
-
-    public String getNrlokalu() {
-        return nrlokalu;
-    }
-
-    public void setNrlokalu(String nrlokalu) {
-        this.nrlokalu = nrlokalu;
+    public void setAdres(Adres adres) {
+        this.adres = adres;
     }
 }

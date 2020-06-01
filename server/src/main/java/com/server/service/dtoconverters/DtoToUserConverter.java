@@ -1,4 +1,4 @@
-package com.server.service;
+package com.server.service.dtoconverters;
 
 import com.server.dto.UserRegistrationDto;
 import com.server.model.User;

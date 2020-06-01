@@ -1,9 +1,7 @@
-package com.server.service;
+package com.server.service.dtoconverters;
 
 import com.server.dto.AllKlientDto;
-import com.server.dto.AllUserDto;
 import com.server.model.Klient;
-import com.server.model.User;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,11 +14,11 @@ public class KlientToDtoConverter implements BaseConverter<Klient, AllKlientDto>
         klientDto.setUsername(from.getUsername());
         klientDto.setEmail(from.getEmail());
         klientDto.setImieinazwisko(from.getImieinazwisko());
-        klientDto.setKodpocztowy(from.getKodpocztowy());
-        klientDto.setMiasto(from.getMiasto());
-        klientDto.setUlica(from.getUlica());
-        klientDto.setNumerdomu(from.getNumerdomu());
-        klientDto.setNrlokalu(from.getNrlokalu());
+        klientDto.setKodpocztowy(from.getAdres().getKodpocztowy());
+        klientDto.setMiasto(from.getAdres().getMiasto());
+        klientDto.setUlica(from.getAdres().getUlica());
+        klientDto.setNumerdomu(from.getAdres().getNumerdomu());
+        klientDto.setNrlokalu(from.getAdres().getNrlokalu());
 
         return klientDto;
     }

@@ -13,7 +13,7 @@ import java.util.List;
 
 public interface KlientService {
 
-    public void addUser(KlientRegistrationDto user);
+    public void addKlient(KlientRegistrationDto user);
     public void updateUser(Klient klient);
     public void removeUser(Klient klient);
     public List<AllKlientDto> getAllUsers();

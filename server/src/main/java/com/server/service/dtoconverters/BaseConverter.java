@@ -1,4 +1,4 @@
-package com.server.service;
+package com.server.service.dtoconverters;
 
 import java.util.ArrayList;
 import java.util.List;

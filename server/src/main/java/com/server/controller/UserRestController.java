@@ -24,7 +24,7 @@ public class UserRestController {
     public void addUser(@RequestBody KlientRegistrationDto userDto){
         System.out.println(userDto.getUsername());
         System.out.println(userDto.getImieinazwisko());
-        klientService.addUser(userDto);
+        klientService.addKlient(userDto);
 
     }
 

@@ -1,93 +1,44 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { matchPath } from 'react-router'
+import '../../css/lista.css';
 class NowaPrzesylka extends Component{
 
-    COURSE_API_URL = 'http://localhost:8080';
     state={
-        imieinazwisko:'',
-        tel:'',
-        email:'',
-        kodpocztowy:'',
-        miejscowosc:'',
-        ulica:'',
-        nrdomu:'',
-        nrlokalu:'',
-        typ:'',
-        rozmiar:'',
-        view:''
+        przesylka:''
     }
 
-    handleChange = (e) => {
+    componentDidMount() {
+
+        console.log(this.props.location.przesylka);
+
         this.setState({
-            [e.target.id]: e.target.value
+            przesylka: this.props.location.przesylka
         })
+    
+    
     }
 
-    handleSubmit = (e) => {
-        e.preventDefault();
-        this.sendData();
-    }
-
-    sendData = () => {
-
-        let authorization = window.sessionStorage.getItem('AuthKey');
-        
-        axios.post('http://localhost:8080/api/przesylka',this.state, {
-            headers: {'Content-Type': 'application/json',
-            authorization
-        }
-          })
-        .then((response) =>{
-            this.props.history.push("/");
-        })
-    }
 
     render(){
-        return(<div>
-        <form onSubmit={this.handleSubmit}>
-            <label>
-            Imie i nazwisko:
-            <input type="text" id="imieinazwisko" onChange={this.handleChange}/>
-            </label>
-            <label>
-            Telefon:
-            <input type="text" id="tel" onChange={this.handleChange}/>
-            </label>
-            <label>
-            Email:
-            <input type="text" id="email" onChange={this.handleChange}/>
-            </label>
-            <label>
-            Kod pocztowy:
-            <input type="text" id="kodpocztowy" onChange={this.handleChange}/>
-            </label>
-            <label>
-            Miejscowość:
-            <input type="text" id="miejscowosc" onChange={this.handleChange}/>
-            </label>
-            <label>
-            Ulica:
-            <input type="text" id="ulica" onChange={this.handleChange}/>
-            </label>
-            <label>
-            Nr domu:
-            <input type="text" id="nrdomu" onChange={this.handleChange}/>
-            </label>
-            <label>
-            Nr lokalu:
-            <input type="text" id="nrlokalu" onChange={this.handleChange}/>
-            </label>
-            <label>
-            Typ:
-            <input type="text" id="typ" onChange={this.handleChange}/>
-            </label>
-            <label>
-            Rozmiar:
-            <input type="text" id="rozmiar" onChange={this.handleChange}/>
-            </label>
-            <input type="submit" value="Wyślij"/>
-        </form>
-        </div>)
+        return (
+            <div className="element">
+                 <p><label>Nr przesylki: </label>{this.state.przesylka.id}</p>
+                 <p><label>Adresat: </label>{this.state.przesylka.imieinazwisko}</p>
+                 <p><label>Tel: </label>{this.state.przesylka.tel}</p>
+                 <p><label>Email: </label>{this.state.przesylka.email}</p>
+                 <p><label>Kod pocztowy: </label>{this.state.przesylka.kodpocztowy}</p>
+                 <p><label>Miejscowosc: </label>{this.state.przesylka.miejscowosc}</p>
+                 <p><label>Ulica: </label>{this.state.przesylka.ulica}</p>
+                 <p><label>Nr domu: </label>{this.state.przesylka.nrdomu}</p>
+                 <p><label>Nr lokalu: </label>{this.state.przesylka.nrlokalu}</p>
+                 <p><label>Typ: </label>{this.state.przesylka.typ}</p>
+                 <p><label>Rozmiar: </label>{this.state.przesylka.rozmiar}</p>
+                 <p><label>Status: </label>{this.state.przesylka.status}</p>
+                 <p><label>Data: </label>{this.state.przesylka.datanadania}</p>
+            </div>
+          )
     }
+
 }
 export default NowaPrzesylka;

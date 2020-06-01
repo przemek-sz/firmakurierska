@@ -1,6 +1,7 @@
 package com.server.model;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Przesylka {
@@ -14,13 +15,17 @@ public class Przesylka {
     private String imieinazwisko;
     private String tel;
     private String email;
-    private String kodpocztowy;
-    private String miejscowosc;
-    private String ulica;
-    private String nrdomu;
-    private String nrlokalu;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="adres")
+    private Adres adres;
     private String typ;
     private String rozmiar;
+    private String status;
+    private Date datanadania;
+
+    private static float koszpodstawowy=5;
+    private static float kosztzwyklej=5;
+    private static float kosztpobraniowej=10;
 
     public Long getId() {
         return id;
@@ -62,44 +67,12 @@ public class Przesylka {
         this.email = email;
     }
 
-    public String getKodpocztowy() {
-        return kodpocztowy;
+    public Adres getAdres() {
+        return adres;
     }
 
-    public void setKodpocztowy(String kodpocztowy) {
-        this.kodpocztowy = kodpocztowy;
-    }
-
-    public String getMiejscowosc() {
-        return miejscowosc;
-    }
-
-    public void setMiejscowosc(String miejscowosc) {
-        this.miejscowosc = miejscowosc;
-    }
-
-    public String getUlica() {
-        return ulica;
-    }
-
-    public void setUlica(String ulica) {
-        this.ulica = ulica;
-    }
-
-    public String getNrdomu() {
-        return nrdomu;
-    }
-
-    public void setNrdomu(String nrdomu) {
-        this.nrdomu = nrdomu;
-    }
-
-    public String getNrlokalu() {
-        return nrlokalu;
-    }
-
-    public void setNrlokalu(String nrlokalu) {
-        this.nrlokalu = nrlokalu;
+    public void setAdres(Adres adres) {
+        this.adres = adres;
     }
 
     public String getTyp() {
@@ -118,21 +91,43 @@ public class Przesylka {
         this.rozmiar = rozmiar;
     }
 
-    @Override
-    public String toString() {
-        return "Przesylka{" +
-                "id=" + id +
-                ", nadawca=" + nadawca +
-                ", imieinazwisko='" + imieinazwisko + '\'' +
-                ", tel='" + tel + '\'' +
-                ", email='" + email + '\'' +
-                ", kodpocztowy='" + kodpocztowy + '\'' +
-                ", miejscowosc='" + miejscowosc + '\'' +
-                ", ulica='" + ulica + '\'' +
-                ", nrdomu='" + nrdomu + '\'' +
-                ", nrlokalu='" + nrlokalu + '\'' +
-                ", typ='" + typ + '\'' +
-                ", rozmiar='" + rozmiar + '\'' +
-                '}';
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Date getDatanadania() {
+        return datanadania;
+    }
+
+    public void setDatanadania(Date datanadania) {
+        this.datanadania = datanadania;
+    }
+
+    public static float getKoszpodstawowy() {
+        return koszpodstawowy;
+    }
+
+    public static void setKoszpodstawowy(float koszpodstawowy) {
+        Przesylka.koszpodstawowy = koszpodstawowy;
+    }
+
+    public static float getKosztzwyklej() {
+        return kosztzwyklej;
+    }
+
+    public static void setKosztzwyklej(float kosztzwyklej) {
+        Przesylka.kosztzwyklej = kosztzwyklej;
+    }
+
+    public static float getKosztpobraniowej() {
+        return kosztpobraniowej;
+    }
+
+    public static void setKosztpobraniowej(float kosztpobraniowej) {
+        Przesylka.kosztpobraniowej = kosztpobraniowej;
     }
 }

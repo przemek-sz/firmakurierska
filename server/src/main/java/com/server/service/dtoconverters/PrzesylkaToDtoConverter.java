@@ -1,8 +1,6 @@
-package com.server.service;
+package com.server.service.dtoconverters;
 
-import com.server.dto.AllKlientDto;
 import com.server.dto.AllPrzesylkaDto;
-import com.server.model.Klient;
 import com.server.model.Przesylka;
 import org.springframework.stereotype.Service;
 
@@ -16,13 +14,15 @@ public class PrzesylkaToDtoConverter implements BaseConverter<Przesylka, AllPrze
         przesylkaDto.setImieinazwisko(from.getImieinazwisko());
         przesylkaDto.setTel(from.getTel());
         przesylkaDto.setEmail(from.getEmail());
-        przesylkaDto.setKodpocztowy(from.getKodpocztowy());
-        przesylkaDto.setMiejscowosc(from.getMiejscowosc());
-        przesylkaDto.setUlica(from.getUlica());
-        przesylkaDto.setNrdomu(from.getNrdomu());
-        przesylkaDto.setNrlokalu(from.getNrlokalu());
+        przesylkaDto.setKodpocztowy(from.getAdres().getKodpocztowy());
+        przesylkaDto.setMiejscowosc(from.getAdres().getMiasto());
+        przesylkaDto.setUlica(from.getAdres().getUlica());
+        przesylkaDto.setNrdomu(from.getAdres().getNumerdomu());
+        przesylkaDto.setNrlokalu(from.getAdres().getNrlokalu());
         przesylkaDto.setTyp(from.getTyp());
         przesylkaDto.setRozmiar(from.getRozmiar());
+        przesylkaDto.setStatus(from.getStatus());
+        przesylkaDto.setDatanadania(from.getDatanadania());
         return przesylkaDto;
     }
 }

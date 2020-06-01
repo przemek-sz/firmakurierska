@@ -1,5 +1,7 @@
 package com.server.dto;
 
+import java.util.Date;
+
 public class AllPrzesylkaDto {
 
     private Long id;
@@ -13,6 +15,8 @@ public class AllPrzesylkaDto {
     private String nrlokalu;
     private String typ;
     private String rozmiar;
+    private String status;
+    private Date datanadania;
 
     public Long getId() {
         return id;
@@ -100,6 +104,22 @@ public class AllPrzesylkaDto {
 
     public void setRozmiar(String rozmiar) {
         this.rozmiar = rozmiar;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Date getDatanadania() {
+        return datanadania;
+    }
+
+    public void setDatanadania(Date datanadania) {
+        this.datanadania = datanadania;
     }
 
     @Override

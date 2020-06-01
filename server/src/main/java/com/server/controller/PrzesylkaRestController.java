@@ -24,8 +24,8 @@ public class PrzesylkaRestController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public void addUser(@RequestBody NowaPrzesylkaDto nowaPrzesylkaDto, Principal principal){
-        przesylkaService.nowaPrzesylka(nowaPrzesylkaDto,principal.getName());
+    public AllPrzesylkaDto addUser(@RequestBody NowaPrzesylkaDto nowaPrzesylkaDto, Principal principal){
+        return przesylkaService.nowaPrzesylka(nowaPrzesylkaDto,principal.getName());
     }
 
     public void updateUser(){
@@ -35,9 +35,18 @@ public class PrzesylkaRestController {
 
     @RequestMapping(method = RequestMethod.GET)
     public List<AllPrzesylkaDto> getAllPrzesylka(Principal principal){
-        System.out.println("kontroller");
         return przesylkaService.getAllPrzesylkaDto(principal.getName());
     }
+
+    @RequestMapping(value="/anulowanie/{id}",method = RequestMethod.PUT)
+    public void setAnulowana(@PathVariable Long id){
+        przesylkaService.setAnulowana(id);
+    }
+
+//    @RequestMapping(value="/{id}",method = RequestMethod.GET)
+//    public AllPrzesylkaDto getPrzesylkaById(@PathVariable Long id){
+//        return przesylkaService.getByid(id);
+//    }
 
     //public User getUserByUserName(String userName){
 

@@ -1,6 +1,7 @@
-package com.server.service;
+package com.server.service.dtoconverters;
 
 import com.server.dto.NowaPrzesylkaDto;
+import com.server.model.Adres;
 import com.server.model.Przesylka;
 import org.springframework.stereotype.Service;
 
@@ -11,16 +12,21 @@ public class DtoToPrzesylkaConverter implements BaseConverter<NowaPrzesylkaDto,P
     public Przesylka convert(NowaPrzesylkaDto from) {
 
         Przesylka przesylka = new Przesylka();
+        Adres adres = new Adres();
         przesylka.setImieinazwisko(from.getImieinazwisko());
         przesylka.setTel(from.getTel());
         przesylka.setEmail(from.getEmail());
-        przesylka.setKodpocztowy(from.getKodpocztowy());
-        przesylka.setMiejscowosc(from.getMiejscowosc());
-        przesylka.setUlica(from.getUlica());
-        przesylka.setNrdomu(from.getNrdomu());
-        przesylka.setNrlokalu(from.getNrlokalu());
+
+        przesylka.setAdres(adres);
+        adres.setKodpocztowy(from.getKodpocztowy());
+        adres.setMiasto(from.getMiejscowosc());
+        adres.setUlica(from.getUlica());
+        adres.setNumerdomu(from.getNrdomu());
+        adres.setNrlokalu(from.getNrlokalu());
+
         przesylka.setTyp(from.getTyp());
         przesylka.setRozmiar(from.getRozmiar());
+        przesylka.setStatus("do_obioru");
 
 
         return przesylka;

@@ -7,6 +7,7 @@ import UsersList from './components/UsersList'
 import Navbar from './components/Navbar'
 import Przesylka from './components/przesylka/Przesylka';
 import WszystkiePrzesylkiKlienta from './components/przesylka/WszystkiePrzesylkiKlienta';
+import NadaniePrzesylki from './components/przesylka/NadaniePrzesylki';
 import NowaPrzesylka from './components/przesylka/NowaPrzesylka';
 
 
@@ -23,25 +24,10 @@ function App() {
         <Route path="/login" component={Login}/>
         <Route path="/usersList" component={UsersList}/>
         <Route path="/przesylka" component={Przesylka}/>
+        <Route path="/nadaniePrzesylki" component={NadaniePrzesylki}/>
         <Route path="/nowaPrzesylka" component={NowaPrzesylka}/>
         <Route path="/przesylkiKlienta" component={WszystkiePrzesylkiKlienta}/>
       </Switch>
-     
-      
-    {/* <Navbar bg="primary" variant="dark">
-    <Switch>
-    <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-    <Nav className="mr-auto">
-      <Nav.Link href="#home">Home</Nav.Link>
-      <Nav.Link href="#features">Features</Nav.Link>
-      <Nav.Link href="#pricing">Pricing</Nav.Link>
-    </Nav>
-    <Form inline>
-      <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-      <Button variant="outline-light">Search</Button>
-    </Form>
-    </Switch>
-  </Navbar> */}
       
     </div>
     </BrowserRouter>

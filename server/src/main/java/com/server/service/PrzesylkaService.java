@@ -11,9 +11,11 @@ import java.util.List;
 
 public interface PrzesylkaService {
 
-    public void nowaPrzesylka(NowaPrzesylkaDto przesylkaDto,String username);
+    public AllPrzesylkaDto nowaPrzesylka(NowaPrzesylkaDto przesylkaDto,String username);
     public void updatePrzesylka(Przesylka przesylka);
     public void removeUser(Przesylka przesylka);
     public List<AllPrzesylkaDto> getAllPrzesylkaDto(String username);
-    public AllPrzesylkaDto getByid(Long id);
+    public AllPrzesylkaDto getDtoByid(Long id);
+    public Przesylka getByid(Long id);
+    public void setAnulowana(Long id);
 }
