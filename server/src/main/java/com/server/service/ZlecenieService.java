@@ -1,12 +1,8 @@
 package com.server.service;
 
-import com.server.dto.AllUserDto;
-import com.server.dto.UserRegistrationDto;
 import com.server.model.Przesylka;
-import com.server.model.User;
+import com.server.model.users.User;
 import com.server.model.Zlecenie;
-
-import java.util.List;
 
 public interface ZlecenieService {
 

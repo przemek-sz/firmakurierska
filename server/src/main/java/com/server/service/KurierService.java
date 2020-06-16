@@ -1,11 +1,7 @@
 package com.server.service;
 
 
-import com.server.dto.AllUserDto;
-import com.server.dto.UserRegistrationDto;
-import com.server.model.Kurier;
-import com.server.model.User;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.server.model.users.Kurier;
 
 import java.util.List;
 

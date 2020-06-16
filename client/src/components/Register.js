@@ -10,7 +10,9 @@ class Register extends Component {
         username:'',
         email:'',
         password:'',
-        imieinazwisko:'',
+        imie:'',
+        nazwisko:'',
+        telefon:'',
         kodpocztowy:'',
         miasto:'',
         ulica:'',
@@ -55,8 +57,16 @@ class Register extends Component {
                     <input type="text" id="email" onChange={this.handleChange}/>
                     </label>
                     <label>
-                    Imie i Nazwisko:
-                    <input type="text" id="imieinazwisko" onChange={this.handleChange}/>
+                    Imie:
+                    <input type="text" id="imie" onChange={this.handleChange}/>
+                    </label>
+                    <label>
+                    Nazwisko:
+                    <input type="text" id="nazwisko" onChange={this.handleChange}/>
+                    </label>
+                    <label>
+                    Telefon:
+                    <input type="text" id="telefon" onChange={this.handleChange}/>
                     </label>
                     <label>
                     Kod pocztowy:

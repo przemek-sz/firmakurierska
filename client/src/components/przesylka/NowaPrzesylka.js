@@ -19,12 +19,11 @@ class NowaPrzesylka extends Component{
     
     }
 
-
     render(){
         return (
             <div className="element">
                  <p><label>Nr przesylki: </label>{this.state.przesylka.id}</p>
-                 <p><label>Adresat: </label>{this.state.przesylka.imieinazwisko}</p>
+                 <p><label>Adresat: </label>{this.state.przesylka.imie+" "+this.state.przesylka.nazwisko}</p>
                  <p><label>Tel: </label>{this.state.przesylka.tel}</p>
                  <p><label>Email: </label>{this.state.przesylka.email}</p>
                  <p><label>Kod pocztowy: </label>{this.state.przesylka.kodpocztowy}</p>
@@ -35,6 +34,8 @@ class NowaPrzesylka extends Component{
                  <p><label>Typ: </label>{this.state.przesylka.typ}</p>
                  <p><label>Rozmiar: </label>{this.state.przesylka.rozmiar}</p>
                  <p><label>Status: </label>{this.state.przesylka.status}</p>
+                 <p><label>Koszt: </label>{this.state.przesylka.koszt}</p>
+                 <p><label>Pobranie: </label>{this.state.przesylka.pobranie}</p>
                  <p><label>Data: </label>{this.state.przesylka.datanadania}</p>
             </div>
           )

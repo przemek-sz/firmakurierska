@@ -1,12 +1,8 @@
 package com.server.service;
 
 import com.server.dto.AllKlientDto;
-import com.server.dto.AllUserDto;
 import com.server.dto.KlientRegistrationDto;
-import com.server.dto.UserRegistrationDto;
-import com.server.model.Klient;
-import com.server.model.User;
-import org.springframework.stereotype.Service;
+import com.server.model.users.Klient;
 
 import java.util.List;
 
@@ -14,9 +10,9 @@ import java.util.List;
 public interface KlientService {
 
     public void addKlient(KlientRegistrationDto user);
-    public void updateUser(Klient klient);
-    public void removeUser(Klient klient);
-    public List<AllKlientDto> getAllUsers();
-    public Klient getByusername(String username);
-    public Klient getByid(Long id);
+    public void updateKlient(Klient klient);
+    public void removeKlient(Klient klient);
+    public List<AllKlientDto> getAllKlients();
+    public Klient getByUsername(String username);
+    public Klient getById(Long id);
 }

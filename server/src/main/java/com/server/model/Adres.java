@@ -12,10 +12,11 @@ public class Adres {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String kodpocztowy;
-    private String miasto;
+    private String miejscowosc;
     private String ulica;
     private String numerdomu;
     private String nrlokalu;
+
 
     public Long getId() {
         return id;
@@ -33,12 +34,12 @@ public class Adres {
         this.kodpocztowy = kodpocztowy;
     }
 
-    public String getMiasto() {
-        return miasto;
+    public String getMiejscowosc() {
+        return miejscowosc;
     }
 
-    public void setMiasto(String miasto) {
-        this.miasto = miasto;
+    public void setMiejscowosc(String miejscowosc) {
+        this.miejscowosc = miejscowosc;
     }
 
     public String getUlica() {

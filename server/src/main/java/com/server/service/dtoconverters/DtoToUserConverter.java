@@ -1,7 +1,7 @@
 package com.server.service.dtoconverters;
 
 import com.server.dto.UserRegistrationDto;
-import com.server.model.User;
+import com.server.model.users.User;
 import org.springframework.stereotype.Service;
 
 @Service

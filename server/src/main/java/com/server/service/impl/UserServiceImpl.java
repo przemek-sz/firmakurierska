@@ -1,10 +1,11 @@
-package com.server.service;
+package com.server.service.impl;
 
 import com.server.dto.AllUserDto;
 import com.server.dto.UserRegistrationDto;
-import com.server.model.User;
+import com.server.model.users.User;
 import com.server.repository.UserRepository;
 import com.server.repository.UserRoleRepository;
+import com.server.service.UserService;
 import com.server.service.dtoconverters.BaseConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -61,11 +62,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getByusername(String username) {
-        return userRepository.getByusername(username);
+        return userRepository.getByUsername(username);
     }
 
     @Override
     public User getByid(Long id) {
-        return userRepository.getByid(id);
+        return userRepository.getOne(id);
     }
 }

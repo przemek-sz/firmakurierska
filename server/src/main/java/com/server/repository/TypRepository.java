@@ -1,9 +1,12 @@
 package com.server.repository;
 
-import com.server.model.users.Kurier;
+import com.server.model.Typ;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
-public interface KurierRepository extends JpaRepository<Kurier,Long> {
+public interface TypRepository extends JpaRepository<Typ,Long> {
+
 }

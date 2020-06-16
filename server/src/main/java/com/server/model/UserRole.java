@@ -1,6 +1,7 @@
 package com.server.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.server.model.users.User;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -18,8 +19,6 @@ public class UserRole {
     @ManyToMany(mappedBy = "roles")
     @JsonBackReference
     private Set<User> users = new HashSet<>();
-
-
 
     public Long getId() {
         return id;

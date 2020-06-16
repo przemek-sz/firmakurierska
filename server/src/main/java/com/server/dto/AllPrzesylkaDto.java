@@ -1,11 +1,13 @@
 package com.server.dto;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class AllPrzesylkaDto {
 
     private Long id;
-    private String imieinazwisko;
+    private String imie;
+    private String nazwisko;
     private String tel;
     private String email;
     private String kodpocztowy;
@@ -16,7 +18,9 @@ public class AllPrzesylkaDto {
     private String typ;
     private String rozmiar;
     private String status;
-    private Date datanadania;
+    private float koszt;
+    private float pobranie;
+    private LocalDate datanadania;
 
     public Long getId() {
         return id;
@@ -26,12 +30,20 @@ public class AllPrzesylkaDto {
         this.id = id;
     }
 
-    public String getImieinazwisko() {
-        return imieinazwisko;
+    public String getImie() {
+        return imie;
     }
 
-    public void setImieinazwisko(String imieinazwisko) {
-        this.imieinazwisko = imieinazwisko;
+    public void setImie(String imie) {
+        this.imie = imie;
+    }
+
+    public String getNazwisko() {
+        return nazwisko;
+    }
+
+    public void setNazwisko(String nazwisko) {
+        this.nazwisko = nazwisko;
     }
 
     public String getTel() {
@@ -114,28 +126,27 @@ public class AllPrzesylkaDto {
         this.status = status;
     }
 
-    public Date getDatanadania() {
+    public LocalDate getDatanadania() {
         return datanadania;
     }
 
-    public void setDatanadania(Date datanadania) {
+    public void setDatanadania(LocalDate datanadania) {
         this.datanadania = datanadania;
     }
 
-    @Override
-    public String toString() {
-        return "AllPrzesylkaDto{" +
-                "id=" + id +
-                ", imieinazwisko='" + imieinazwisko + '\'' +
-                ", tel='" + tel + '\'' +
-                ", email='" + email + '\'' +
-                ", kodpocztowy='" + kodpocztowy + '\'' +
-                ", miejscowosc='" + miejscowosc + '\'' +
-                ", ulica='" + ulica + '\'' +
-                ", nrdomu='" + nrdomu + '\'' +
-                ", nrlokalu='" + nrlokalu + '\'' +
-                ", typ='" + typ + '\'' +
-                ", rozmiar='" + rozmiar + '\'' +
-                '}';
+    public float getKoszt() {
+        return koszt;
+    }
+
+    public void setKoszt(float koszt) {
+        this.koszt = koszt;
+    }
+
+    public float getPobranie() {
+        return pobranie;
+    }
+
+    public void setPobranie(float pobranie) {
+        this.pobranie = pobranie;
     }
 }

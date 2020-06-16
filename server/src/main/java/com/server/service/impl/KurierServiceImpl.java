@@ -1,7 +1,8 @@
-package com.server.service;
+package com.server.service.impl;
 
-import com.server.model.Kurier;
+import com.server.model.users.Kurier;
 import com.server.repository.KurierRepository;
+import com.server.service.KurierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +11,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class KurierServiceImpl implements KurierService{
+public class KurierServiceImpl implements KurierService {
 
     private KurierRepository kurierRepository;
 

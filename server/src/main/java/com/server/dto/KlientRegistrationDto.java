@@ -5,9 +5,11 @@ public class KlientRegistrationDto implements UserDto {
     private String username;
     private String email;
     private String password;
-    private String imieinazwisko;
+    private String imie;
+    private String nazwisko;
+    private String telefon;
     private String kodpocztowy;
-    private String miasto;
+    private String miejscowosc;
     private String ulica;
     private String numerdomu;
     private String nrlokalu;
@@ -36,12 +38,28 @@ public class KlientRegistrationDto implements UserDto {
         this.password = password;
     }
 
-    public String getImieinazwisko() {
-        return imieinazwisko;
+    public String getImie() {
+        return imie;
     }
 
-    public void setImieinazwisko(String imieinazwisko) {
-        this.imieinazwisko = imieinazwisko;
+    public void setImie(String imie) {
+        this.imie = imie;
+    }
+
+    public String getNazwisko() {
+        return nazwisko;
+    }
+
+    public void setNazwisko(String nazwisko) {
+        this.nazwisko = nazwisko;
+    }
+
+    public String getTelefon() {
+        return telefon;
+    }
+
+    public void setTelefon(String telefon) {
+        this.telefon = telefon;
     }
 
     public String getKodpocztowy() {
@@ -52,12 +70,12 @@ public class KlientRegistrationDto implements UserDto {
         this.kodpocztowy = kodpocztowy;
     }
 
-    public String getMiasto() {
-        return miasto;
+    public String getMiejscowosc() {
+        return miejscowosc;
     }
 
-    public void setMiasto(String miasto) {
-        this.miasto = miasto;
+    public void setMiejscowosc(String miejscowosc) {
+        this.miejscowosc = miejscowosc;
     }
 
     public String getUlica() {
@@ -82,20 +100,5 @@ public class KlientRegistrationDto implements UserDto {
 
     public void setNrlokalu(String nrlokalu) {
         this.nrlokalu = nrlokalu;
-    }
-
-    @Override
-    public String toString() {
-        return "KlientRegistrationDto{" +
-                "username='" + username + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", imieinazwisko='" + imieinazwisko + '\'' +
-                ", kodpocztowy='" + kodpocztowy + '\'' +
-                ", miasto='" + miasto + '\'' +
-                ", ulica='" + ulica + '\'' +
-                ", numerdomu='" + numerdomu + '\'' +
-                ", nrlokalu='" + nrlokalu + '\'' +
-                '}';
     }
 }

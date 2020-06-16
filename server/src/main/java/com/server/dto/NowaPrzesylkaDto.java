@@ -1,8 +1,17 @@
 package com.server.dto;
 
+import com.server.model.Status;
+import com.sun.istack.NotNull;
+import org.springframework.validation.annotation.Validated;
+
+import java.util.Date;
+
+@Validated
 public class NowaPrzesylkaDto {
 
-    private String imieinazwisko;
+    private Long id;
+    private String imie;
+    private String nazwisko;
     private String tel;
     private String email;
     private String kodpocztowy;
@@ -10,15 +19,33 @@ public class NowaPrzesylkaDto {
     private String ulica;
     private String nrdomu;
     private String nrlokalu;
-    private String typ;
+    private Long typ;
     private String rozmiar;
+    private String waga;
+    private String pobranie;
 
-    public String getImieinazwisko() {
-        return imieinazwisko;
+    public String getImie() {
+        return imie;
     }
 
-    public void setImieinazwisko(String imieinazwisko) {
-        this.imieinazwisko = imieinazwisko;
+    public void setImie(String imie) {
+        this.imie = imie;
+    }
+
+    public String getNazwisko() {
+        return nazwisko;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setNazwisko(String nazwisko) {
+        this.nazwisko = nazwisko;
     }
 
     public String getTel() {
@@ -77,11 +104,11 @@ public class NowaPrzesylkaDto {
         this.nrlokalu = nrlokalu;
     }
 
-    public String getTyp() {
+    public Long getTyp() {
         return typ;
     }
 
-    public void setTyp(String typ) {
+    public void setTyp(Long typ) {
         this.typ = typ;
     }
 
@@ -93,10 +120,29 @@ public class NowaPrzesylkaDto {
         this.rozmiar = rozmiar;
     }
 
+    public String getWaga() {
+        return waga;
+    }
+
+    public void setWaga(String waga) {
+        this.waga = waga;
+    }
+
+    public String getPobranie() {
+        return pobranie;
+    }
+
+    public void setPobranie(String pobranie) {
+        this.pobranie = pobranie;
+    }
+
+
     @Override
     public String toString() {
         return "NowaPrzesylkaDto{" +
-                "imieinazwisko='" + imieinazwisko + '\'' +
+                "id=" + id +
+                ", imie='" + imie + '\'' +
+                ", nazwisko='" + nazwisko + '\'' +
                 ", tel='" + tel + '\'' +
                 ", email='" + email + '\'' +
                 ", kodpocztowy='" + kodpocztowy + '\'' +
@@ -104,8 +150,10 @@ public class NowaPrzesylkaDto {
                 ", ulica='" + ulica + '\'' +
                 ", nrdomu='" + nrdomu + '\'' +
                 ", nrlokalu='" + nrlokalu + '\'' +
-                ", typ='" + typ + '\'' +
+                ", typ=" + typ +
                 ", rozmiar='" + rozmiar + '\'' +
+                ", waga='" + waga + '\'' +
+                ", pobranie='" + pobranie + '\'' +
                 '}';
     }
 }

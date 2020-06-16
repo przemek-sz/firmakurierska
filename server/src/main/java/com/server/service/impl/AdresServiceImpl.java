@@ -1,8 +1,8 @@
-package com.server.service;
+package com.server.service.impl;
 
 import com.server.model.Adres;
-import com.server.model.Klient;
 import com.server.repository.AdresRepository;
+import com.server.service.AdresService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +10,7 @@ import javax.transaction.Transactional;
 
 @Service
 @Transactional
-public class AdresServiceImpl implements AdresService{
+public class AdresServiceImpl implements AdresService {
 
     private AdresRepository adresRepository;
 

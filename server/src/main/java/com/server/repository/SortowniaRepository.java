@@ -1,9 +1,9 @@
 package com.server.repository;
 
-import com.server.model.users.Kurier;
+import com.server.model.Sortownia;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface KurierRepository extends JpaRepository<Kurier,Long> {
+public interface SortowniaRepository extends JpaRepository<Sortownia,Long> {
 }

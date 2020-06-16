@@ -11,18 +11,21 @@ public class PrzesylkaToDtoConverter implements BaseConverter<Przesylka, AllPrze
     {
         AllPrzesylkaDto przesylkaDto = new AllPrzesylkaDto();
         przesylkaDto.setId(from.getId());
-        przesylkaDto.setImieinazwisko(from.getImieinazwisko());
+        przesylkaDto.setImie(from.getImie());
+        przesylkaDto.setNazwisko(from.getNazwisko());
         przesylkaDto.setTel(from.getTel());
         przesylkaDto.setEmail(from.getEmail());
         przesylkaDto.setKodpocztowy(from.getAdres().getKodpocztowy());
-        przesylkaDto.setMiejscowosc(from.getAdres().getMiasto());
+        przesylkaDto.setMiejscowosc(from.getAdres().getMiejscowosc());
         przesylkaDto.setUlica(from.getAdres().getUlica());
         przesylkaDto.setNrdomu(from.getAdres().getNumerdomu());
         przesylkaDto.setNrlokalu(from.getAdres().getNrlokalu());
-        przesylkaDto.setTyp(from.getTyp());
+        przesylkaDto.setTyp(from.getTyp().getNazwa());
         przesylkaDto.setRozmiar(from.getRozmiar());
-        przesylkaDto.setStatus(from.getStatus());
+        przesylkaDto.setStatus(from.getStatus().name());
         przesylkaDto.setDatanadania(from.getDatanadania());
+        przesylkaDto.setKoszt(from.getKoszt());
+        przesylkaDto.setPobranie(from.getPobranie());
         return przesylkaDto;
     }
 }

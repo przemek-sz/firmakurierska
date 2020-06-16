@@ -1,5 +1,7 @@
 package com.server.model;
 
+import com.server.model.users.Kurier;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -9,11 +11,11 @@ public class Zlecenie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="przesylka_id")
     private Przesylka przesylka;
-    private String status;
-    private String typ;
+    @Enumerated(EnumType.STRING)
+    private Status status;
     private Date dataUtworzenia;
     private Date dataZrealizowania;
     @ManyToOne
@@ -23,7 +25,7 @@ public class Zlecenie {
     @JoinColumn(name = "adresodbioru")
     private Adres adresodbioru;
     @OneToOne
-    @JoinColumn(name = "adresdostarczenia")
+    @JoinColumn(name = "adresdostawy")
     private Adres adresdostarczenia;
 
     public Long getId() {
@@ -42,20 +44,12 @@ public class Zlecenie {
         this.przesylka = przesylka;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
-    }
-
-    public String getTyp() {
-        return typ;
-    }
-
-    public void setTyp(String typ) {
-        this.typ = typ;
     }
 
     public Date getDataUtworzenia() {

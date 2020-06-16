@@ -12,7 +12,7 @@ import NowaPrzesylka from './components/przesylka/NowaPrzesylka';
 
 
 function App() {
-  window.sessionStorage.setItem('Auth',false);
+  //window.sessionStorage.setItem('Auth',Boolean(false));
   return (
     <BrowserRouter>
     <div className="App">

@@ -2,8 +2,7 @@ package com.server.service;
 
 import com.server.dto.AllUserDto;
 import com.server.dto.UserRegistrationDto;
-import com.server.model.User;
-import org.springframework.stereotype.Service;
+import com.server.model.users.User;
 
 import java.util.List;
 

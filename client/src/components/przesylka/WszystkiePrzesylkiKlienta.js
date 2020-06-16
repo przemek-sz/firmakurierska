@@ -5,9 +5,9 @@ class WszystkiePrzesylkiKlienta extends Component{
 
     state = {
         przesylki: [],
-        edit: false,
+        edytowalna: true,
         przesylka: null,
-        anulowalna: true
+        details: false
     }
 
     componentDidMount() {
@@ -18,24 +18,35 @@ class WszystkiePrzesylkiKlienta extends Component{
     }
 
     handleClick = (p) => {
+      console.log(p.status);
+      if(p.status==="ANULOWANA"||p.status==="DOSTARCZONA"){
+        this.setState({
+          edytowalna:false
+        });  console.log(this.state.edytowalna);
+      }
+      
       this.setState({
         przesylka: p,
-        edit:true
+        details:true
       })
-      if(p.status==='anulowana'||p.status==='dostarczona'){
-        this.setState({
-          anulowalna:false
-        })  
-      }
+      
+  }
+
+
+  edytowanieClick = () => {
+    this.props.history.push({
+      pathname: '/nadaniePrzesylki',
+      przesylka: this.state.przesylka
+    });
   }
 
   anulowanieClick = (id) => {
     let authorization = window.sessionStorage.getItem('AuthKey');
     let p = this.state.przesylka;
-    p.status='anulowana';
+    p.status='ANULOWANA';
     this.setState({
       przesylka:p,
-      anulowalna:false
+      edytowalna:false
     })    
 
     console.log("anulowanie")
@@ -78,7 +89,7 @@ class WszystkiePrzesylkiKlienta extends Component{
             return (
               <div className="element">
                 <label>Nr przesylki: </label>{przesylka.id+", "}
-                <label> Adresat: </label>{przesylka.imieinazwisko+" "}
+                <label> Adresat: </label>{przesylka.imie+" "+przesylka.nazwisko}
                 <button onClick={() => this.handleClick(przesylka)}> Szczegoly </button>
               </div>
             )
@@ -98,7 +109,8 @@ class WszystkiePrzesylkiKlienta extends Component{
         return (
           <div className="element">
                <p><label>Nr przesylki: </label>{this.state.przesylka.id}</p>
-               <p><label>Adresat: </label>{this.state.przesylka.imieinazwisko}</p>
+               <p><label>Adresat: </label>{this.state.przesylka.imie}</p>
+               <p><label>Adresat: </label>{this.state.przesylka.nazwisko}</p>
                <p><label>Tel: </label>{this.state.przesylka.tel}</p>
                <p><label>Email: </label>{this.state.przesylka.email}</p>
                <p><label>Kod pocztowy: </label>{this.state.przesylka.kodpocztowy}</p>
@@ -109,17 +121,22 @@ class WszystkiePrzesylkiKlienta extends Component{
                <p><label>Typ: </label>{this.state.przesylka.typ}</p>
                <p><label>Rozmiar: </label>{this.state.przesylka.rozmiar}</p>
                <p><label>Status: </label>{this.state.przesylka.status}</p>
+               <p><label>Koszt: </label>{this.state.przesylka.koszt}</p>
+               <p><label>Pobranie: </label>{this.state.przesylka.pobranie}</p>
                <p><label>Data: </label>{this.state.przesylka.datanadania}</p>
-               <p>{this.state.anulowalna? (
+               <p>{this.state.edytowalna? (
+              <div>
+              <button onClick={() => this.edytowanieClick()}> Edytuj</button>
               <button onClick={() => this.anulowanieClick(this.state.przesylka.id)}> Anuluj</button>
-               ) : ("")}</p>
+              </div>
+               ) : (<div></div>)}</p>
           </div>
         )
       }
 
 
       render() {
-        if(this.state.edit===false)
+        if(this.state.details===false)
         return(this.all())
         else return(this.one())
       }

@@ -1,31 +1,65 @@
 package com.server.model;
 
+import com.server.model.users.Klient;
+
+import org.springframework.validation.annotation.Validated;
+
 import javax.persistence.*;
+import javax.validation.constraints.*;
+
+
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
+@Validated
 public class Przesylka {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    @JoinColumn(name="nadawca")
+    @JoinColumn(name="nadawca_id")
+    @NotNull
     private Klient nadawca;
-    private String imieinazwisko;
+    @NotNull
+    @Size(min = 1)
+    private String imie;
+    @NotNull
+    @Size(min = 1)
+    private String nazwisko;
+    @NotNull
+    @Size(min = 9)
     private String tel;
+    @NotNull
+    @Email
     private String email;
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="adres")
+    @JoinColumn(name="adres_id")
+    @NotNull
     private Adres adres;
-    private String typ;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "typ_id")
+    @NotNull
+    private Typ typ;
+    @NotNull
+    @Size(min = 9)
     private String rozmiar;
-    private String status;
-    private Date datanadania;
-
-    private static float koszpodstawowy=5;
-    private static float kosztzwyklej=5;
-    private static float kosztpobraniowej=10;
+    @NotNull
+    @Min(1)
+    private int waga;
+    @Enumerated(EnumType.STRING)
+    @NotNull
+    private Status status;
+    @NotNull
+    private LocalDate datanadania;
+    @NotNull
+    @Min(1)
+    private float koszt;
+    private float pobranie;
+    @NotNull
+    @Min(1)
+    private int rozmiarSuma;
 
     public Long getId() {
         return id;
@@ -43,12 +77,20 @@ public class Przesylka {
         this.nadawca = nadawca;
     }
 
-    public String getImieinazwisko() {
-        return imieinazwisko;
+    public String getImie() {
+        return imie;
     }
 
-    public void setImieinazwisko(String imieinazwisko) {
-        this.imieinazwisko = imieinazwisko;
+    public void setImie(String imie) {
+        this.imie = imie;
+    }
+
+    public String getNazwisko() {
+        return nazwisko;
+    }
+
+    public void setNazwisko(String nazwisko) {
+        this.nazwisko = nazwisko;
     }
 
     public String getTel() {
@@ -75,11 +117,11 @@ public class Przesylka {
         this.adres = adres;
     }
 
-    public String getTyp() {
+    public Typ getTyp() {
         return typ;
     }
 
-    public void setTyp(String typ) {
+    public void setTyp(Typ typ) {
         this.typ = typ;
     }
 
@@ -91,43 +133,72 @@ public class Przesylka {
         this.rozmiar = rozmiar;
     }
 
-    public String getStatus() {
+    public int getWaga() {
+        return waga;
+    }
+
+    public void setWaga(int waga) {
+        this.waga = waga;
+    }
+
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
-    public Date getDatanadania() {
+    public LocalDate getDatanadania() {
         return datanadania;
     }
 
-    public void setDatanadania(Date datanadania) {
+    public void setDatanadania(LocalDate datanadania) {
         this.datanadania = datanadania;
     }
 
-    public static float getKoszpodstawowy() {
-        return koszpodstawowy;
+    public float getKoszt() {
+        return koszt;
     }
 
-    public static void setKoszpodstawowy(float koszpodstawowy) {
-        Przesylka.koszpodstawowy = koszpodstawowy;
+    public void setKoszt(float koszt) {
+        this.koszt = koszt;
     }
 
-    public static float getKosztzwyklej() {
-        return kosztzwyklej;
+    public float getPobranie() {
+        return pobranie;
     }
 
-    public static void setKosztzwyklej(float kosztzwyklej) {
-        Przesylka.kosztzwyklej = kosztzwyklej;
+    public void setPobranie(float pobranie) {
+        this.pobranie = pobranie;
     }
 
-    public static float getKosztpobraniowej() {
-        return kosztpobraniowej;
+    public int getRozmiarSuma() {
+        return rozmiarSuma;
     }
 
-    public static void setKosztpobraniowej(float kosztpobraniowej) {
-        Przesylka.kosztpobraniowej = kosztpobraniowej;
+    public void setRozmiarSuma(int rozmiarSuma) {
+        this.rozmiarSuma = rozmiarSuma;
+    }
+
+    @Override
+    public String toString() {
+        return "Przesylka{" +
+                "id=" + id +
+                ", nadawca=" + nadawca +
+                ", imie='" + imie + '\'' +
+                ", nazwisko='" + nazwisko + '\'' +
+                ", tel='" + tel + '\'' +
+                ", email='" + email + '\'' +
+                ", adres=" + adres +
+                ", typ=" + typ +
+                ", rozmiar='" + rozmiar + '\'' +
+                ", waga=" + waga +
+                ", status=" + status +
+                ", datanadania=" + datanadania +
+                ", koszt=" + koszt +
+                ", pobranie=" + pobranie +
+                ", rozmiarSuma=" + rozmiarSuma +
+                '}';
     }
 }

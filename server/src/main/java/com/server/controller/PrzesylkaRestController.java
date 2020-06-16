@@ -7,6 +7,7 @@ import com.server.dto.NowaPrzesylkaDto;
 import com.server.service.PrzesylkaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -24,12 +25,16 @@ public class PrzesylkaRestController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public AllPrzesylkaDto addUser(@RequestBody NowaPrzesylkaDto nowaPrzesylkaDto, Principal principal){
+    public AllPrzesylkaDto nadaniePrzesylki(@RequestBody @Validated NowaPrzesylkaDto nowaPrzesylkaDto, Principal principal){
+
+        System.out.println(nowaPrzesylkaDto.toString());
+
         return przesylkaService.nowaPrzesylka(nowaPrzesylkaDto,principal.getName());
     }
 
-    public void updateUser(){
-
+    @RequestMapping(method = RequestMethod.PUT)
+    public AllPrzesylkaDto updatePrzesylka(@RequestBody NowaPrzesylkaDto nowaPrzesylkaDto, Principal principal){
+        return przesylkaService.editPrzesylka(nowaPrzesylkaDto,principal.getName());
     }
 
 
@@ -43,19 +48,4 @@ public class PrzesylkaRestController {
         przesylkaService.setAnulowana(id);
     }
 
-//    @RequestMapping(value="/{id}",method = RequestMethod.GET)
-//    public AllPrzesylkaDto getPrzesylkaById(@PathVariable Long id){
-//        return przesylkaService.getByid(id);
-//    }
-
-    //public User getUserByUserName(String userName){
-
-    // return userService.getByUsername(userName);
-    // }
-
-    /*
-    @RequestMapping(value="/{id}",method = RequestMethod.DELETE)
-    public void removeUser(@PathVariable Long id){
-        klientService.removeUser(klientService.getByid(id));
-    }*/
 }
