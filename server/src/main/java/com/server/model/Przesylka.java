@@ -43,8 +43,8 @@ public class Przesylka {
     @NotNull
     private Typ typ;
     @NotNull
-    @Size(min = 9)
-    private String rozmiar;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Rozmiar rozmiar;
     @NotNull
     @Min(1)
     private int waga;
@@ -125,11 +125,11 @@ public class Przesylka {
         this.typ = typ;
     }
 
-    public String getRozmiar() {
+    public Rozmiar getRozmiar() {
         return rozmiar;
     }
 
-    public void setRozmiar(String rozmiar) {
+    public void setRozmiar(Rozmiar rozmiar) {
         this.rozmiar = rozmiar;
     }
 

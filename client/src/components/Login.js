@@ -51,7 +51,7 @@ class Login extends Component{
                     Password:
                     <input type="text" id="password" onChange={this.handleChange}/>
                     </label>
-                    <input type="submit" value="Wyślij"/>
+                    <input className="buttonSend" type="submit" value="Zaloguj"/>
                 </form>
 
             </div>

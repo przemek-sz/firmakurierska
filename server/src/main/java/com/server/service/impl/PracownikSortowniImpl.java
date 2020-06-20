@@ -1,8 +1,7 @@
 package com.server.service.impl;
 
-import com.server.dto.KurierDto;
+import com.server.dto.PracownikDto;
 import com.server.dto.PracownikSortowniDto;
-import com.server.model.users.Kurier;
 import com.server.model.users.Pracownik;
 import com.server.model.users.PracownikSortowni;
 import com.server.model.users.User;
@@ -10,27 +9,26 @@ import com.server.repository.KurierRepository;
 import com.server.repository.PracownikRepository;
 import com.server.repository.PracownikSortowniRepository;
 import com.server.repository.UserRoleRepository;
-import com.server.service.KurierService;
+import com.server.service.PracownikSortowniService;
 import com.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
-import java.util.List;
 
 @Service
 @Transactional
-public class KurierServiceImpl implements KurierService {
+public class PracownikSortowniImpl implements PracownikSortowniService {
 
-    private KurierRepository kurierRepository;
     UserService userService;
     PracownikRepository pracownikRepository;
     PracownikSortowniRepository pracownikSortowniRepository;
+    KurierRepository kurierRepository;
     UserRoleRepository userRoleRepository;
 
     @Autowired
-    KurierServiceImpl(UserService userService, PracownikRepository pracownikRepository, PracownikSortowniRepository pracownikSortowniRepository, KurierRepository kurierRepository, UserRoleRepository userRoleRepository){
+    public PracownikSortowniImpl(UserService userService, PracownikRepository pracownikRepository, PracownikSortowniRepository pracownikSortowniRepository, KurierRepository kurierRepository, UserRoleRepository userRoleRepository){
         this.userService=userService;
         this.pracownikRepository=pracownikRepository;
         this.pracownikSortowniRepository=pracownikSortowniRepository;
@@ -39,13 +37,14 @@ public class KurierServiceImpl implements KurierService {
     }
 
 
+
     @Override
-    public void addKurier(KurierDto dto) {
+    public void addPracownikSortowni(PracownikSortowniDto dto) {
 
         User user;
         Pracownik pracownik;
-        Kurier kurier;
-        String KURIER_ROLE="ROLE_KURIER";
+        PracownikSortowni pracownikSortowni;
+        String PRACOWNIK_ROLE="ROLE_PRACOWNIK";
 
         user = userService.getByusername(dto.getUsername());
         if(user==null){
@@ -55,21 +54,23 @@ public class KurierServiceImpl implements KurierService {
             user.setEmail(dto.getUsername()+"@"+"kurierska.pl");
             user.setImie(dto.getImie());
             user.setNazwisko(dto.getNazwisko());
-            user.getRoles().add(userRoleRepository.getByRole(KURIER_ROLE));
+            user.getRoles().add(userRoleRepository.getByRole(PRACOWNIK_ROLE));
 
 
             pracownik = new Pracownik();
             pracownik.setDataZatrudnienia(LocalDate.now());
 
-            kurier=new Kurier();
+            pracownikSortowni = new PracownikSortowni();
+            pracownikSortowni.setNazwaDzialu(dto.getNazwaDzialu());
 
             user.setPracownik(pracownik);
             pracownik.setUser(user);
 
-            pracownik.setKurier(kurier);
-            kurier.setPracownik(pracownik);
+            pracownik.setPracownikSortowni(pracownikSortowni);
+            pracownikSortowni.setPracownik(pracownik);
 
             userService.addUser(user);
+
 
         }else {
 
@@ -79,13 +80,14 @@ public class KurierServiceImpl implements KurierService {
                 pracownik = new Pracownik();
                 pracownik.setDataZatrudnienia(LocalDate.now());
 
-                kurier = new Kurier();
+                pracownikSortowni = new PracownikSortowni();
+                pracownikSortowni.setNazwaDzialu(dto.getNazwaDzialu());
 
                 user.setPracownik(pracownik);
                 pracownik.setUser(user);
 
-                pracownik.setKurier(kurier);
-                kurier.setPracownik(pracownik);
+                pracownik.setPracownikSortowni(pracownikSortowni);
+                pracownikSortowni.setPracownik(pracownik);
 
                 userService.updateUser(user);
             }
@@ -98,19 +100,20 @@ public class KurierServiceImpl implements KurierService {
                 pracownik.setKurier(null);
 
                 if(pracownik.getPracownikSortowni()!=null){
-                    pracownik.getPracownikSortowni().setPracownik(null);
-                    pracownikSortowniRepository.save(pracownik.getPracownikSortowni());
+                     pracownik.getPracownikSortowni().setPracownik(null);
+                     pracownikSortowniRepository.save(pracownik.getPracownikSortowni());
                 }
 
                 pracownik.setPracownikSortowni(null);
 
-                kurier = new Kurier();
+                pracownikSortowni = new PracownikSortowni();
+                pracownikSortowni.setNazwaDzialu(dto.getNazwaDzialu());
 
                 user.setPracownik(pracownik);
                 pracownik.setUser(user);
 
-                pracownik.setKurier(kurier);
-                kurier.setPracownik(pracownik);
+                pracownik.setPracownikSortowni(pracownikSortowni);
+                pracownikSortowni.setPracownik(pracownik);
 
                 userService.updateUser(user);
 
@@ -120,29 +123,5 @@ public class KurierServiceImpl implements KurierService {
 
 
     }
-
-    @Override
-    public void updateKurier(Kurier kurier) {
-
-    }
-
-    @Override
-    public void removeKurier(Kurier kurier) {
-
-    }
-
-    @Override
-    public List<Kurier> getKurierList() {
-        return kurierRepository.findAll();
-    }
-
-    @Override
-    public Kurier getByusername(String username) {
-        return null;
-    }
-
-    @Override
-    public Kurier getByid(Long id) {
-        return null;
-    }
 }
+

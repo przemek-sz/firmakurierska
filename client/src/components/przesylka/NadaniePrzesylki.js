@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Select from 'react-select';
+import '../../css/NadaniePrzesylki.css'
+
+const options = [
+  { value: 'chocolate', label: 'Chocolate' },
+  { value: 'strawberry', label: 'Strawberry' },
+  { value: 'vanilla', label: 'Vanilla' },
+];
 class NadaniePrzesylki extends Component{
 
     COURSE_API_URL = 'http://localhost:8080';
@@ -22,12 +30,16 @@ class NadaniePrzesylki extends Component{
             status:''
             },
         typy:[],
+        rozmiary:[],
         view:'',
-        edit:false
+        edit:false,
+        failed:false,
+        selectedOption:''
     }
 
     componentDidMount(){
         console.log(this.props.location.przesylka);
+        this.getRozmiar();
         if(!(this.props.location.przesylka===undefined)){
             console.log(this.props.location.przesylka);
             this.setState({
@@ -80,6 +92,15 @@ class NadaniePrzesylki extends Component{
         }
     }
 
+    handleOption= selectedOption => {
+      let p = this.state.przesylka;
+      p.rozmiar=selectedOption.value;
+      this.setState({ 
+       przesylka:p,
+       selectedOption:selectedOption
+      });
+    };
+
     getTypes = () => {
 
         axios({
@@ -97,6 +118,23 @@ class NadaniePrzesylki extends Component{
 
     }
 
+    getRozmiar = () => {
+
+      axios({
+          'method': 'get',
+          'url': 'http://localhost:8080/api/rozmiar',
+          'headers': {
+            'Content-Type': 'application/json'
+          }
+        })
+          .then((response) => {
+            this.setState({
+              rozmiary: response.data
+            })
+          });
+
+  }
+
     sendData = () => {
 
         let authorization = window.sessionStorage.getItem('AuthKey');
@@ -113,6 +151,11 @@ class NadaniePrzesylki extends Component{
                 przesylka: response.data
               });
         })
+        .catch((error) =>{
+          this.setState({
+            failed:true
+          })
+        })
         }else{
             axios.put('http://localhost:8080/api/przesylka',this.state.przesylka, {
             headers: {'Content-Type': 'application/json',
@@ -124,6 +167,11 @@ class NadaniePrzesylki extends Component{
                 pathname: '/nowaPrzesylka',
                 przesylka: response.data
               });
+        })
+        .catch((error) =>{
+          this.setState({
+            failed:true
+          })
         })
         }
 
@@ -150,12 +198,18 @@ class NadaniePrzesylki extends Component{
           </div>
         )
     }
-
+    
 
     form(){
         console.log("Form");
+        const { selectedOption } = this.state;
         return(<div>
             <form onSubmit={this.handleSubmit}>
+                {(this.state.failed===true) ?
+                  (<label className="errorlabel">Niepoprawne dane!</label>):
+                  (<label></label>)
+                }
+                <p></p>
                 <label>
                 Imie:
                 <input type="text" id="imie" onChange={this.handleChange}/>
@@ -194,11 +248,12 @@ class NadaniePrzesylki extends Component{
                 </label>
                 <label>
                 Rozmiar:
-                <select id="rozmiar" onChange={this.handleChange}>
-                    <option selected value="8 x 38 x 64">8 X 38 X 64</option>
-                    <option value="19 x 38 x 64">19 X 38 X 64</option>
-                    <option value="41 x 38 x 64">41 X 38 X 64</option>
-                </select>
+                <Select
+                   name="form-field-name"
+                   value={selectedOption}
+                   onChange={this.handleOption}
+                   options={this.state.rozmiary}
+                />
                 </label>
                 <p></p>
                 <label>
@@ -210,15 +265,21 @@ class NadaniePrzesylki extends Component{
                   (<label>Pobranie:
                     <input type="text" id="pobranie" onChange={this.handleChange}/></label>)
                 }
-                <input type="submit" value="Wyślij"/>
+                <input className="buttonSend" type="submit" value="Wyślij"/>
             </form>
             </div>)
     }
 
     editForm(){
         console.log("EditForm");
+        const { selectedOption } = this.state;
         return(<div>
             <form onSubmit={this.handleSubmit}>
+                {(this.state.failed===true) ?
+                  (<label className="errorlabel">Niepoprawne dane!</label>):
+                  (<label></label>)
+                }
+                <p></p>
                 <label>
                 Imie:
                 <input type="text" id="imie" defaultValue={this.state.przesylka.imie} onChange={this.handleChange}/>
@@ -257,23 +318,24 @@ class NadaniePrzesylki extends Component{
                 </label>
                 <label>
                 Rozmiar:
-                <select id="rozmiar" onChange={this.handleChange}>
-                    <option selected value="8 x 38 x 64">8 X 38 X 64</option>
-                    <option value="19 x 38 x 64">19 X 38 X 64</option>
-                    <option value="41 x 38 x 64">41 X 38 X 64</option>
-                </select>
+                <Select
+                   name="form-field-name"
+                   value={selectedOption}
+                   onChange={this.handleOption}
+                   options={this.state.rozmiary}
+                />
                 </label>
                 <p></p>
                 <label>
                 Waga:
                 <input type="text" id="waga" defaultValue={this.state.przesylka.waga} onChange={this.handleChange}/>
                 </label>
-                {!(this.state.przesylka.typ===1) ?
-                  (<label></label>):
+                {(this.state.przesylka.typ===1) ?
                   (<label>Pobranie:
-                    <input type="text" id="pobranie" defaultValue={this.state.przesylka.pobranie} onChange={this.handleChange}/></label>)
+                    <input type="text" id="pobranie" defaultValue={this.state.przesylka.pobranie} onChange={this.handleChange}/></label>):
+                  (<label></label>)
                 }
-                <input type="submit" value="Wyślij"/>
+                <input className="buttonSend" type="submit" value="Wyślij"/>
             </form>
             </div>)
     }

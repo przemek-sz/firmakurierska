@@ -44,6 +44,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void addUser(User user) {
+
+        String DEFAULT_ROLE="ROLE_USER";
+
+        user.getRoles().add(userRoleRepository.getByRole(DEFAULT_ROLE));
+
+        userRepository.save(user);
+    }
+
+    @Override
     public void updateUser(User user) {
         userRepository.save(user);
     }

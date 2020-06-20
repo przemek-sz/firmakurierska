@@ -45,18 +45,18 @@ class Navbar extends React.Component {
             
             <div >
                 <ul>
-                    <li><NavLink exact to="/">Home</NavLink></li>
-                    <li><NavLink to='/przesylka'>Przesylki</NavLink></li>
+                    <li><NavLink exact to="/">Strona główna</NavLink></li>
+                    <li><NavLink to='/przesylka'>Przesyłki</NavLink></li>
                     
                     {(this.state.auth==='true') ? (
                         <div>
-                             <li><NavLink to='/usersList'>UsersList</NavLink></li>
-                             <li onClick={this.logout}><NavLink exact to="/">Logout</NavLink></li>
+                             <li><NavLink to='/usersList'>Lista Klientów</NavLink></li>
+                             <li onClick={this.logout}><NavLink exact to="/">Wyloguj</NavLink></li>
                         </div>
                     ) : (
                         <div>
-                            <li><NavLink to='/login'>Login</NavLink></li>
-                            <li><NavLink to='/register'>Register</NavLink></li>
+                            <li><NavLink to='/login'>Zaloguj</NavLink></li>
+                            <li><NavLink to='/register'>Rejestracja</NavLink></li>
                         </div> 
                         )}
                 </ul>

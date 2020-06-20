@@ -39,6 +39,6 @@ public class KlientRestController {
 
     @RequestMapping(value="/{id}",method = RequestMethod.DELETE)
     public void removeKlient(@PathVariable Long id){
-        klientService.removeKlient(klientService.getById(id));
+        klientService.deleteKlient(klientService.getById(id));
     }
 }

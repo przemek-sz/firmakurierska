@@ -21,6 +21,7 @@ public class AllPrzesylkaDto {
     private float koszt;
     private float pobranie;
     private LocalDate datanadania;
+    private int waga;
 
     public Long getId() {
         return id;
@@ -148,5 +149,13 @@ public class AllPrzesylkaDto {
 
     public void setPobranie(float pobranie) {
         this.pobranie = pobranie;
+    }
+
+    public int getWaga() {
+        return waga;
+    }
+
+    public void setWaga(int waga) {
+        this.waga = waga;
     }
 }

@@ -2,15 +2,10 @@ package com.server.service.impl;
 
 import com.server.dto.AllPrzesylkaDto;
 import com.server.dto.NowaPrzesylkaDto;
-import com.server.model.Przesylka;
-import com.server.model.Status;
-import com.server.model.Typ;
-import com.server.model.Zlecenie;
+import com.server.model.*;
 import com.server.repository.PrzesylkaRepository;
-import com.server.service.KlientService;
-import com.server.service.PrzesylkaService;
-import com.server.service.TypService;
-import com.server.service.ZlecenieService;
+import com.server.repository.RozmiarRepository;
+import com.server.service.*;
 import com.server.service.dtoconverters.BaseConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,18 +22,22 @@ public class PrzesylkaServiceImpl implements PrzesylkaService {
     private PrzesylkaRepository przesylkaRepository;
     private KlientService klientService;
     private TypService typService;
+    private RozmiarRepository rozmiarRepository;
     private ZlecenieService zlecenieService;
     private BaseConverter<Przesylka, AllPrzesylkaDto> baseConverter;
     private BaseConverter<NowaPrzesylkaDto, Przesylka> przesylkaBaseConverter;
+    private AdresService adresService;
 
     @Autowired
-    PrzesylkaServiceImpl(PrzesylkaRepository przesylkaRepository, BaseConverter<NowaPrzesylkaDto,Przesylka> przesylkaBaseConverter, BaseConverter<Przesylka, AllPrzesylkaDto> baseConverter, KlientService klientService, ZlecenieService zlecenieService, TypService typService){
+    PrzesylkaServiceImpl(PrzesylkaRepository przesylkaRepository, BaseConverter<NowaPrzesylkaDto,Przesylka> przesylkaBaseConverter, BaseConverter<Przesylka, AllPrzesylkaDto> baseConverter, KlientService klientService, ZlecenieService zlecenieService, TypService typService, RozmiarRepository rozmiarRepository, AdresService adresService){
         this.przesylkaRepository=przesylkaRepository;
         this.przesylkaBaseConverter=przesylkaBaseConverter;
         this.baseConverter=baseConverter;
         this.klientService=klientService;
         this.zlecenieService=zlecenieService;
         this.typService=typService;
+        this.rozmiarRepository=rozmiarRepository;
+        this.adresService=adresService;
     }
 
     @Override
@@ -51,6 +50,21 @@ public class PrzesylkaServiceImpl implements PrzesylkaService {
         przesylka.setStatus(Status.DOODBIORU);
         przesylka.setDatanadania(LocalDate.now());
         przesylka.setNadawca(klientService.getByUsername(username));
+
+        Adres adresFromDto = przesylka.getAdres();
+
+        Adres adresFromdDatabase = adresService.getByAllColumns(adresFromDto.getKodpocztowy(),adresFromDto.getMiejscowosc(),adresFromDto.getUlica(),adresFromDto.getNumerdomu(),adresFromDto.getNrlokalu());
+
+        if(adresFromdDatabase!=null)
+            przesylka.setAdres(adresFromdDatabase);
+
+        przesylka.setRozmiar(rozmiarRepository.getOne(przesylkaDto.getRozmiar()));
+        int r=0;
+
+        for(String s : przesylka.getRozmiar().getRozmiar().split("x")){
+            r+=Integer.parseInt(s.trim());
+        }
+        przesylka.setRozmiarSuma(r);
 
 
         przesylka.setKoszt(obliczKoszt(typ.getKoszt(),przesylka.getRozmiarSuma(),przesylka.getWaga()));
@@ -93,20 +107,35 @@ public class PrzesylkaServiceImpl implements PrzesylkaService {
 
         Przesylka oldPrzesylka = przesylkaRepository.getOne(przesylkaDto.getId());
         Typ typ = typService.getById(przesylkaDto.getTyp());
+        Rozmiar rozmiar = rozmiarRepository.getOne(przesylkaDto.getRozmiar());
         Przesylka newPrzesylka = przesylkaBaseConverter.convert(przesylkaDto);
+
+        Adres adresFromDto = newPrzesylka.getAdres();
+
+        Adres adresFromdDatabase = adresService.getByAllColumns(adresFromDto.getKodpocztowy(),adresFromDto.getMiejscowosc(),adresFromDto.getUlica(),adresFromDto.getNumerdomu(),adresFromDto.getNrlokalu());
+
+        if(adresFromdDatabase!=null)
+            newPrzesylka.setAdres(adresFromdDatabase);
 
         newPrzesylka.setNadawca(klientService.getByUsername(username));
         newPrzesylka.setTyp(typ);
+        newPrzesylka.setRozmiar(rozmiar);
+        int r=0;
+
+        for(String s : newPrzesylka.getRozmiar().getRozmiar().split("x")){
+            r+=Integer.parseInt(s.trim());
+        }
+        newPrzesylka.setRozmiarSuma(r);
         newPrzesylka.setKoszt(obliczKoszt(typ.getKoszt(),newPrzesylka.getRozmiarSuma(),newPrzesylka.getWaga()));
         if(typ.getNazwa().equals("Pobraniowa")) {
             newPrzesylka.setPobranie(newPrzesylka.getKoszt()+Float.parseFloat(przesylkaDto.getPobranie().replace(",",".")));
         }
         newPrzesylka.setStatus(oldPrzesylka.getStatus());
-        System.out.println(oldPrzesylka.getDatanadania());
-        newPrzesylka.setDatanadania(oldPrzesylka.getDatanadania());
-        System.out.println(newPrzesylka.getDatanadania());
 
-        System.out.println(newPrzesylka.toString());
+        newPrzesylka.setDatanadania(oldPrzesylka.getDatanadania());
+
+
+
 
         this.updatePrzesylka(newPrzesylka);
 

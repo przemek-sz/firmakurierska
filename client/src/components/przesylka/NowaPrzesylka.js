@@ -33,6 +33,7 @@ class NowaPrzesylka extends Component{
                  <p><label>Nr lokalu: </label>{this.state.przesylka.nrlokalu}</p>
                  <p><label>Typ: </label>{this.state.przesylka.typ}</p>
                  <p><label>Rozmiar: </label>{this.state.przesylka.rozmiar}</p>
+                 <p><label>Waga: </label>{this.state.przesylka.waga}</p>
                  <p><label>Status: </label>{this.state.przesylka.status}</p>
                  <p><label>Koszt: </label>{this.state.przesylka.koszt}</p>
                  <p><label>Pobranie: </label>{this.state.przesylka.pobranie}</p>

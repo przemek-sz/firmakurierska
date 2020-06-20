@@ -38,4 +38,10 @@ public class AdresServiceImpl implements AdresService {
     public Adres getById(Long id) {
         return adresRepository.getOne(id);
     }
+
+    @Override
+    public Adres getByAllColumns(String kod, String miejscowosc, String ulica, String nrdomu, String nrlokalu) {
+
+        return adresRepository.getAdresByKodpocztowyAndMiejscowoscAndUlicaAndNumerdomuAndNrlokalu(kod, miejscowosc, ulica, nrdomu, nrlokalu);
+    }
 }

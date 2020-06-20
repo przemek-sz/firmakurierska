@@ -2,10 +2,12 @@ package com.server.service.impl;
 
 import com.server.dto.AllKlientDto;
 import com.server.dto.KlientRegistrationDto;
+import com.server.model.Adres;
 import com.server.model.users.Klient;
 import com.server.repository.KlientRepository;
 import com.server.repository.UserRepository;
 import com.server.repository.UserRoleRepository;
+import com.server.service.AdresService;
 import com.server.service.KlientService;
 import com.server.service.dtoconverters.BaseConverter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,14 +25,16 @@ public class KlientServiceImpl implements KlientService {
     UserRoleRepository userRoleRepository;
     BaseConverter<Klient, AllKlientDto> baseConverter;
     BaseConverter<KlientRegistrationDto,Klient> registrationBaseConverter;
+    AdresService adresService;
 
     @Autowired
-    KlientServiceImpl(KlientRepository klientRepository, UserRepository userRepository, UserRoleRepository userRoleRepository, BaseConverter<Klient, AllKlientDto> baseConverter, BaseConverter<KlientRegistrationDto, Klient> registrationBaseConverter){
+    KlientServiceImpl(KlientRepository klientRepository, UserRepository userRepository, UserRoleRepository userRoleRepository, BaseConverter<Klient, AllKlientDto> baseConverter, BaseConverter<KlientRegistrationDto, Klient> registrationBaseConverter, AdresService adresService){
         this.klientRepository=klientRepository;
         this.userRepository=userRepository;
         this.userRoleRepository=userRoleRepository;
         this.baseConverter=baseConverter;
         this.registrationBaseConverter=registrationBaseConverter;
+        this.adresService=adresService;
     }
 
     @Override
@@ -45,7 +49,14 @@ public class KlientServiceImpl implements KlientService {
         klient.getUser().getRoles().add(userRoleRepository.getByRole(DEFAULT_ROLE));
         klient.getUser().getRoles().add(userRoleRepository.getByRole(ROLE_KLIENT));
 
-        System.out.println(klient.getUser().getNazwisko());
+        Adres adresFromDto = klient.getAdres();
+
+        Adres adresFromdDatabase = adresService.getByAllColumns(adresFromDto.getKodpocztowy(),adresFromDto.getMiejscowosc(),adresFromDto.getUlica(),adresFromDto.getNumerdomu(),adresFromDto.getNrlokalu());
+
+        if(adresFromdDatabase!=null)
+            klient.setAdres(adresFromdDatabase);
+
+        //System.out.println(klient.getUser().getNazwisko());
 
         klientRepository.save(klient);
     }
@@ -56,7 +67,7 @@ public class KlientServiceImpl implements KlientService {
     }
 
     @Override
-    public void removeKlient(Klient klient) {
+    public void deleteKlient(Klient klient) {
         klientRepository.delete(klient);
     }
 

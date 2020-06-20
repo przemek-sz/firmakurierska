@@ -14,7 +14,7 @@ class Register extends Component {
         nazwisko:'',
         telefon:'',
         kodpocztowy:'',
-        miasto:'',
+        miejscowosc:'',
         ulica:'',
         numerdomu:'',
         nrlokalu:'',
@@ -73,7 +73,7 @@ class Register extends Component {
                     <input type="text" id="kodpocztowy" onChange={this.handleChange}/>
                     </label><label>
                     Miasto:
-                    <input type="text" id="miasto" onChange={this.handleChange}/>
+                    <input type="text" id="miejscowosc" onChange={this.handleChange}/>
                     </label><label>
                     Ulica:
                     <input type="text" id="ulica" onChange={this.handleChange}/>
@@ -84,7 +84,7 @@ class Register extends Component {
                     Nr lokalu:
                     <input type="text" id="nrlokalu" onChange={this.handleChange}/>
                     </label>
-                    <input type="submit" value="Wyślij"/>
+                    <input className="buttonSend" type="submit" value="Rejestracja"/>
                 </form>
 
             </div>

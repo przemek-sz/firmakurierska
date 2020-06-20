@@ -65,4 +65,16 @@ public class Adres {
     public void setNrlokalu(String nrlokalu) {
         this.nrlokalu = nrlokalu;
     }
+
+    @Override
+    public String toString() {
+        return "Adres{" +
+                "id=" + id +
+                ", kodpocztowy='" + kodpocztowy + '\'' +
+                ", miejscowosc='" + miejscowosc + '\'' +
+                ", ulica='" + ulica + '\'' +
+                ", numerdomu='" + numerdomu + '\'' +
+                ", nrlokalu='" + nrlokalu + '\'' +
+                '}';
+    }
 }

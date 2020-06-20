@@ -37,7 +37,7 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="klient_id")
     private Klient klient;
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name="pracownik_id")
     private Pracownik pracownik;
 

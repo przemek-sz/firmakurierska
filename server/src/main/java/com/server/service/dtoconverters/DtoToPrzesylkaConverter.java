@@ -28,17 +28,6 @@ public class DtoToPrzesylkaConverter implements BaseConverter<NowaPrzesylkaDto,P
         adres.setNumerdomu(from.getNrdomu());
         adres.setNrlokalu(from.getNrlokalu());
 
-
-
-        przesylka.setRozmiar(from.getRozmiar());
-        int r=0;
-
-        for(String s : from.getRozmiar().split("x")){
-            r+=Integer.parseInt(s.trim());
-        }
-        przesylka.setRozmiarSuma(r);
-
-
         przesylka.setWaga(Integer.parseInt(from.getWaga()));
 
         return przesylka;

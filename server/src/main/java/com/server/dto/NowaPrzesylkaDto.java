@@ -20,7 +20,7 @@ public class NowaPrzesylkaDto {
     private String nrdomu;
     private String nrlokalu;
     private Long typ;
-    private String rozmiar;
+    private Long rozmiar;
     private String waga;
     private String pobranie;
 
@@ -112,11 +112,11 @@ public class NowaPrzesylkaDto {
         this.typ = typ;
     }
 
-    public String getRozmiar() {
+    public Long getRozmiar() {
         return rozmiar;
     }
 
-    public void setRozmiar(String rozmiar) {
+    public void setRozmiar(Long rozmiar) {
         this.rozmiar = rozmiar;
     }
 
